@@ -51,9 +51,13 @@ namespace Steamworks.Data
 		/// <summary>
 		/// Attaches a piece of user generated content the user's entry on a leaderboard
 		/// </summary>
-		public async Task<Result> AttachUgc( Ugc file )
+		public async Task<Result> AttachUgc( PublishedFileId file )
 		{
-			var r = await SteamUserStats.Internal.AttachLeaderboardUGC( Id, file.Handle );
+			var ugcHandle = new UGCHandle_t()
+			{
+				Value = file.Value
+			};
+			var r = await SteamUserStats.Internal.AttachLeaderboardUGC( Id, ugcHandle );
 			if ( !r.HasValue ) return Result.Fail;
 
 			return r.Value.Result;
@@ -120,7 +124,7 @@ namespace Steamworks.Data
 		{
 			if ( r.CEntryCount <= 0 )
 				return null;
-
+			
 			var output = new LeaderboardEntry[r.CEntryCount];
 			var e = default( LeaderboardEntry_t );
 

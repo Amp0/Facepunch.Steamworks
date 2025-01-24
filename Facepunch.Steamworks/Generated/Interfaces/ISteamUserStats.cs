@@ -7,30 +7,19 @@ using Steamworks.Data;
 
 namespace Steamworks
 {
-	internal unsafe class ISteamUserStats : SteamInterface
+	internal unsafe partial class ISteamUserStats : SteamInterface
 	{
+		public const string Version = "STEAMUSERSTATS_INTERFACE_VERSION013";
 		
 		internal ISteamUserStats( bool IsGameServer )
 		{
 			SetupInterface( IsGameServer );
 		}
 		
-		[DllImport( Platform.LibraryName, EntryPoint = "SteamAPI_SteamUserStats_v012", CallingConvention = Platform.CC)]
-		internal static extern IntPtr SteamAPI_SteamUserStats_v012();
-		public override IntPtr GetUserInterfacePointer() => SteamAPI_SteamUserStats_v012();
+		[DllImport( Platform.LibraryName, EntryPoint = "SteamAPI_SteamUserStats_v013", CallingConvention = Platform.CC)]
+		internal static extern IntPtr SteamAPI_SteamUserStats_v013();
+		public override IntPtr GetUserInterfacePointer() => SteamAPI_SteamUserStats_v013();
 		
-		
-		#region FunctionMeta
-		[DllImport( Platform.LibraryName, EntryPoint = "SteamAPI_ISteamUserStats_RequestCurrentStats", CallingConvention = Platform.CC)]
-		[return: MarshalAs( UnmanagedType.I1 )]
-		private static extern bool _RequestCurrentStats( IntPtr self );
-		
-		#endregion
-		internal bool RequestCurrentStats()
-		{
-			var returnValue = _RequestCurrentStats( Self );
-			return returnValue;
-		}
 		
 		#region FunctionMeta
 		[DllImport( Platform.LibraryName, EntryPoint = "SteamAPI_ISteamUserStats_GetStatInt32", CallingConvention = Platform.CC)]

@@ -7,8 +7,9 @@ using Steamworks.Data;
 
 namespace Steamworks
 {
-	internal unsafe class ISteamInput : SteamInterface
+	internal unsafe partial class ISteamInput : SteamInterface
 	{
+		public const string Version = "SteamInput006";
 		
 		internal ISteamInput( bool IsGameServer )
 		{

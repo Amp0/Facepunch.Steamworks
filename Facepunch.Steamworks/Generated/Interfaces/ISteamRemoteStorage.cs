@@ -7,8 +7,9 @@ using Steamworks.Data;
 
 namespace Steamworks
 {
-	internal unsafe class ISteamRemoteStorage : SteamInterface
+	internal unsafe partial class ISteamRemoteStorage : SteamInterface
 	{
+		public const string Version = "STEAMREMOTESTORAGE_INTERFACE_VERSION016";
 		
 		internal ISteamRemoteStorage( bool IsGameServer )
 		{
